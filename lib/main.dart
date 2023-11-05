@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:job_search_app_frontend/views/introduce/introduce_screen.dart';
+import 'package:job_search_app_frontend/views/auth/login.dart';
 import 'common/export.dart';
 
 void main() {
@@ -19,12 +19,13 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Jobey - A Job Search App',
+          title: 'Jobee - A Job Search App',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: iosDefaultIndigo),
+            fontFamily: GoogleFonts.getFont('Fira Sans').fontFamily,
             useMaterial3: true,
           ),
-          home: const IntroduceScreen(),
+          home: const LoginForm(),
         );
       },
     );
