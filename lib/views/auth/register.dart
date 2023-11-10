@@ -76,7 +76,7 @@ class _RegisterFormState extends State<RegisterForm>
                       ]),
                       keyboardType: TextInputType.phone,
                       decoration: const InputDecoration(
-                          labelText: 'Số điện thoại đăng nhập',
+                          labelText: 'Số điện thoại',
                           border: OutlineInputBorder()),
                     ),
                     Gap(2.h),

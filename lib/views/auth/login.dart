@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:job_search_app_frontend/common/logo.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:job_search_app_frontend/views/auth/register.dart';
+import 'package:job_search_app_frontend/views/nav_screen.dart';
 
 import '../../common/export.dart';
 
@@ -140,16 +141,18 @@ class _LoginFormState extends State<LoginForm> with TickerProviderStateMixin {
   }
 
   void _handleLogin() {
-    if (_fbKey.currentState!.saveAndValidate()) {
-      String username = _fbKey.currentState!.fields['username']!.value;
-      String password = _fbKey.currentState!.fields['password']!.value;
-
-      if (username == "your_username" && password == "your_password") {
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Đăng nhập thất bại'),
-        ));
-      }
-    }
+    Get.to(() => const NavigationScreen());
+    // if (_fbKey.currentState!.saveAndValidate()) {
+    //   String telephone = _fbKey.currentState!.fields['telephone']!.value;
+    //   String password = _fbKey.currentState!.fields['password']!.value;
+    //
+    //   if (telephone == "1602022502" && password == "250202") {
+    //     Get.to(() => const NavigationScreen());
+    //   } else {
+    //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+    //       content: Text('Đăng nhập thất bại'),
+    //     ));
+    //   }
+    // }
   }
 }
