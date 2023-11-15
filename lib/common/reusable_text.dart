@@ -4,14 +4,16 @@ class ReusableText extends StatelessWidget {
   final String text;
   final TextStyle? style;
   final TextAlign? textAlign;
+  final int? maxLines;
 
-  const ReusableText(this.text, {super.key, this.style, this.textAlign});
+  const ReusableText(this.text,
+      {super.key, this.style, this.textAlign, this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(text,
-        softWrap: false,
         textAlign: textAlign ?? TextAlign.left,
+        maxLines: maxLines,
         overflow: TextOverflow.fade,
         style: style ??
             appStyle(size: 4, color: Colors.black, fw: FontWeight.normal));

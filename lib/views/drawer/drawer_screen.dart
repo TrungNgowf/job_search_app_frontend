@@ -1,10 +1,14 @@
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:job_search_app_frontend/common/custom_button.dart';
 import 'package:job_search_app_frontend/common/export.dart';
+import 'package:job_search_app_frontend/controllers/auth_notifier.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/zoom_notifier.dart';
+import '../auth/login.dart';
 
 class DrawerScreen extends StatefulWidget {
   final ValueSetter indexSetter;
@@ -16,6 +20,8 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
+  AuthNotifier _authNotifier = AuthNotifier();
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ZoomNotifier>(
@@ -70,8 +76,19 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           ? Colors.white
                           : Colors.white.withOpacity(0.5)),
                   Gap(15.h),
-                  OutlinedButton(
-                      onPressed: null, child: ReusableText("Đăng xuất"))
+                  GestureDetector(
+                    onTap: () {
+                      _authNotifier.logout();
+                      Get.offAll(() => const LoginForm());
+                    },
+                    child: CustomButton(
+                      backGroundColor: Colors.red,
+                      child: ReusableText(
+                        "Đăng xuất",
+                        style: appStyle(color: Colors.white),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

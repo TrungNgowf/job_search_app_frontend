@@ -5,6 +5,8 @@ import 'package:job_search_app_frontend/common/logo.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../common/export.dart';
+import '../../controllers/auth_notifier.dart';
+import '../../models/request/register_req.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -15,6 +17,7 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm>
     with TickerProviderStateMixin {
+  AuthNotifier authNotifier = AuthNotifier();
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
   bool _isShowPassword = false;
   bool _isShowRePassword = false;
@@ -189,14 +192,15 @@ class _RegisterFormState extends State<RegisterForm>
   void _handleLogin() {
     if (_fbKey.currentState!.saveAndValidate()) {
       String username = _fbKey.currentState!.fields['username']!.value;
+      String telephone = _fbKey.currentState!.fields['telephone']!.value;
+      String email = _fbKey.currentState!.fields['email']!.value;
       String password = _fbKey.currentState!.fields['password']!.value;
-
-      if (username == "your_username" && password == "your_password") {
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Đăng nhập thất bại'),
-        ));
-      }
+      RegisterRequest registerRequest = RegisterRequest(
+          username: username,
+          telephone: telephone,
+          email: email,
+          password: password);
+      authNotifier.register(registerRequest);
     }
   }
 }

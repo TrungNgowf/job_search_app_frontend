@@ -14,11 +14,9 @@ class CustomAppbar extends StatelessWidget {
     return AppBar(
       title: ReusableText(
         title,
-        style: appStyle(size: 5.5, color: Colors.white, fw: FontWeight.w500),
+        style: appStyle(size: 4.8, color: Colors.black, fw: FontWeight.w500),
       ),
       centerTitle: true,
-      backgroundColor: iosDefaultIndigo,
-      elevation: 5,
       leading: leading ??
           IconButton(
             onPressed: () {
