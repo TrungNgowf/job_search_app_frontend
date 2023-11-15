@@ -101,7 +101,7 @@ class _JobPageState extends State<JobPage> {
             child: ReusableText(
               "Ứng tuyển ngay",
               style:
-                  appStyle(size: 4.5, color: Colors.white, fw: FontWeight.w500),
+                  appStyle(size: 4, color: Colors.white, fw: FontWeight.w500),
             ),
           )
         ],
