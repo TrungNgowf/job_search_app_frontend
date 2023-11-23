@@ -4,12 +4,15 @@ import 'package:get/get.dart';
 import 'package:job_search_app_frontend/common/export.dart';
 import 'package:job_search_app_frontend/controllers/job_notifiier.dart';
 import 'package:job_search_app_frontend/models/response/job_res.dart';
+import 'package:job_search_app_frontend/views/job/job_card.dart';
 import 'package:job_search_app_frontend/views/job/job_page.dart';
+import 'package:job_search_app_frontend/views/job/jobs_list.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:intl/intl.dart';
 import '../../common/custom_appbar.dart';
 import '../../common/custom_navigator_appbar.dart';
+import '../job/jobs_search.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -91,24 +94,29 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Card(
             elevation: 3,
-            child: Container(
-              height: 6.h,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                children: [
-                  Gap(3.w),
-                  Icon(
-                    Icons.search_outlined,
-                    color: Colors.black,
-                  ),
-                  Gap(3.w),
-                  ReusableText(
-                    'Bạn muốn tìm việc?',
-                  ),
-                ],
+            child: GestureDetector(
+              onTap: () {
+                Get.to(() => const JobSearch());
+              },
+              child: Container(
+                height: 6.h,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  children: [
+                    Gap(3.w),
+                    const Icon(
+                      Icons.search_outlined,
+                      color: Colors.black,
+                    ),
+                    Gap(3.w),
+                    const ReusableText(
+                      'Bạn muốn tìm việc?',
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -146,9 +154,14 @@ class _HomePageState extends State<HomePage> {
               "Việc làm gợi ý cho bạn",
               style: appStyle(fw: FontWeight.w600),
             ),
-            ReusableText(
-              "Xem thêm",
-              style: appStyle(size: 3.5, color: iosLightIndigo),
+            GestureDetector(
+              onTap: () {
+                Get.to(() => const JobsList());
+              },
+              child: ReusableText(
+                "Xem thêm",
+                style: appStyle(size: 3.5, color: iosLightIndigo),
+              ),
             )
           ],
         ),
@@ -182,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         final job = recommendationJobs[index];
-                        return _jobCard(job);
+                        return JobCard(job: job);
                       }),
                 );
               }
@@ -202,9 +215,14 @@ class _HomePageState extends State<HomePage> {
               "Việc làm mới",
               style: appStyle(fw: FontWeight.w600),
             ),
-            ReusableText(
-              "Xem thêm",
-              style: appStyle(size: 3.5, color: iosLightIndigo),
+            GestureDetector(
+              onTap: () {
+                Get.to(() => const JobsList(isRecent: true));
+              },
+              child: ReusableText(
+                "Xem thêm",
+                style: appStyle(size: 3.5, color: iosLightIndigo),
+              ),
             )
           ],
         ),
@@ -236,95 +254,12 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         final job = recentJobs[index];
-                        return _jobCard(job);
+                        return JobCard(job: job);
                       }),
                 );
               }
             })
       ],
-    );
-  }
-
-  Widget _jobCard(JobResponse job) {
-    return GestureDetector(
-      onTap: () {
-        Get.to(() => JobPage(job: job));
-      },
-      child: Card(
-        elevation: 3,
-        child: Container(
-          padding: EdgeInsets.all(2.w),
-          width: 80.w,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: job.imageUrl == "" || job.imageUrl == null
-                            ? Image.asset(defaultCompanyLogo)
-                            : Image.network(job.imageUrl!)),
-                    Expanded(
-                        flex: 2,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ReusableText(
-                                job.title ?? '',
-                                style: appStyle(size: 4.2, fw: FontWeight.w600),
-                                maxLines: 2,
-                              ),
-                              ReusableText(job.company ?? ''),
-                              ReusableText(
-                                "${job.location} (${job.contract})",
-                                style: appStyle(size: 3.8),
-                              ),
-                              ReusableText(
-                                '${job.salary}/${job.period}',
-                                style:
-                                    appStyle(size: 3.8, color: iosLightIndigo),
-                              ),
-                            ],
-                          ),
-                        ))
-                  ],
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ReusableText(
-                        "Còn ${job.expiredDate!.difference(DateTime.now()).inDays + 1} ngày",
-                        style: appStyle(size: 3.5),
-                      ),
-                      ReusableText(
-                        "Ngày đăng: ${dateFormat.format(job.createdAt!)}",
-                        style: appStyle(size: 3.5),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:job_search_app_frontend/common/custom_button.dart';
 import 'package:job_search_app_frontend/common/export.dart';
+import 'package:job_search_app_frontend/controllers/bookmark_notifier.dart';
 import 'package:job_search_app_frontend/models/response/job_res.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/custom_appbar.dart';
 
@@ -21,6 +23,24 @@ class _JobPageState extends State<JobPage> {
         preferredSize: Size.fromHeight(7.h),
         child: CustomAppbar(
           title: widget.job.company ?? "Chi tiết công việc",
+          trailing: [
+            Padding(
+              padding: EdgeInsets.only(right: 4.w),
+              child: Consumer<BookmarkNotifier>(
+                builder: (BuildContext context, BookmarkNotifier value,
+                    Widget? child) {
+                  return GestureDetector(
+                    onTap: () {
+                      value.addBookmark(widget.job.id!);
+                    },
+                    child: const Icon(
+                      Icons.bookmark_border_rounded,
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
         ),
       ),
       body: Column(

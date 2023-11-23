@@ -24,4 +24,21 @@ class JobRepository {
       throw Exception('Failed to load jobs');
     }
   }
+
+  Future<List<JobResponse>> searchJobs(String searchKey) async {
+    SharedPreferences? prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'token': 'Bearer $token'
+    };
+    var url = Uri.https(ApiRoutes.baseUrl, "${ApiRoutes.searchUrl}/$searchKey");
+    var response = await client.get(url, headers: requestHeaders);
+    if (response.statusCode == 200) {
+      List<JobResponse> jobsList = jobsResponseFromJson(response.body);
+      return jobsList;
+    } else {
+      throw Exception('Failed to load jobs');
+    }
+  }
 }

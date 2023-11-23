@@ -4,6 +4,7 @@ import 'package:job_search_app_frontend/controllers/zoom_notifier.dart';
 import 'package:job_search_app_frontend/views/drawer/drawer_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'bookmark/bookmark.dart';
 import 'chatting/chat_page.dart';
 import 'home/home_page.dart';
 
@@ -42,7 +43,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
       case 1:
         return const ChatPage();
       case 2:
-        return const HomePage();
+        return const BookmarkPage();
       default:
         return const ChatPage();
     }

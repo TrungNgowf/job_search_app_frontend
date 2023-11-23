@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'common/export.dart';
 import 'controllers/auth_notifier.dart';
+import 'controllers/bookmark_notifier.dart';
 import 'controllers/job_notifiier.dart';
 import 'controllers/zoom_notifier.dart';
 
@@ -23,6 +24,7 @@ void main() async {
     ChangeNotifierProvider(create: (context) => AuthNotifier()),
     ChangeNotifierProvider(create: (context) => ZoomNotifier()),
     ChangeNotifierProvider(create: (context) => JobNotifier()),
+    ChangeNotifierProvider(create: (context) => BookmarkNotifier()),
   ], child: const MyApp()));
 }
 
