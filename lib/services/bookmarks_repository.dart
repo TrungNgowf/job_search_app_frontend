@@ -30,7 +30,7 @@ class BookmarksRepository {
     }
   }
 
-  static Future<List<AllBookmarksRes>> getBookmarks() async {
+  static Future<List<AllBookmarksResponse>> getBookmarks() async {
     SharedPreferences? prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     Map<String, String> requestHeaders = {
@@ -40,7 +40,7 @@ class BookmarksRepository {
     var url = Uri.https(ApiRoutes.baseUrl, ApiRoutes.bookmarkUrl);
     var response = await client.get(url, headers: requestHeaders);
     if (response.statusCode == 200) {
-      var bookmarksList = allBookmarksResFromJson(response.body);
+      var bookmarksList = allBookmarksResponseFromJson(response.body);
       return bookmarksList;
     } else {
       throw Exception('Tải danh sách công việc đã lưu thất bại');

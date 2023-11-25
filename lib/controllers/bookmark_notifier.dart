@@ -4,7 +4,7 @@ import 'package:job_search_app_frontend/models/response/all_bookmarks_res.dart';
 import 'package:job_search_app_frontend/services/bookmarks_repository.dart';
 
 class BookmarkNotifier extends ChangeNotifier {
-  Future<List<AllBookmarksRes>>? listBookmarks;
+  Future<List<AllBookmarksResponse>>? listBookmarks;
 
   // Future<void> addJobs() async {
   //   listJobs = await BookmarksRepository.getBookmarks();

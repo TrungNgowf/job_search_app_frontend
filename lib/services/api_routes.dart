@@ -8,4 +8,6 @@ class ApiRoutes {
   static const String jobUrl = '/jobs';
   static const String bookmarkUrl = '/bookmarks';
   static const String searchUrl = '/jobs/search';
+  static const String chatUrl = '/chats';
+  static const String messageUrl = '/messages';
 }

@@ -1,33 +1,33 @@
 // To parse this JSON data, do
 //
-//     final allBookmarksRes = allBookmarksResFromJson(jsonString);
+//     final AllBookmarksResponse = AllBookmarksResponseFromJson(jsonString);
 
 import 'dart:convert';
 
 import 'package:job_search_app_frontend/models/response/job_res.dart';
 
-List<AllBookmarksRes> allBookmarksResFromJson(String str) =>
-    List<AllBookmarksRes>.from(
-        jsonDecode(str).map((x) => AllBookmarksRes.fromJson(x)));
+List<AllBookmarksResponse> allBookmarksResponseFromJson(String str) =>
+    List<AllBookmarksResponse>.from(
+        jsonDecode(str).map((x) => AllBookmarksResponse.fromJson(x)));
 
-String allBookmarksResToJson(AllBookmarksRes data) =>
+String allBookmarksResponseToJson(AllBookmarksResponse data) =>
     json.encode(data.toJson());
 
-class AllBookmarksRes {
+class AllBookmarksResponse {
   final JobResponse job;
   final String userId;
   final String id;
   final DateTime createdAt;
 
-  AllBookmarksRes({
+  AllBookmarksResponse({
     required this.job,
     required this.userId,
     required this.id,
     required this.createdAt,
   });
 
-  factory AllBookmarksRes.fromJson(Map<String, dynamic> json) =>
-      AllBookmarksRes(
+  factory AllBookmarksResponse.fromJson(Map<String, dynamic> json) =>
+      AllBookmarksResponse(
         job: JobResponse.fromJson(json["job"]),
         userId: json["userId"],
         id: json["_id"],

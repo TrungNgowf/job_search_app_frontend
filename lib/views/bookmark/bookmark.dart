@@ -34,7 +34,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
         builder: (BuildContext context, BookmarkNotifier bookmarkNotifier,
             Widget? child) {
           bookmarkNotifier.getBookmarks();
-          return FutureBuilder<List<AllBookmarksRes>>(
+          return FutureBuilder<List<AllBookmarksResponse>>(
             future: bookmarkNotifier.listBookmarks,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -63,7 +63,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
   }
 
   Widget bookmarkCard(
-      AllBookmarksRes bookmarksRes, BookmarkNotifier bookmarkNotifier) {
+      AllBookmarksResponse bookmarksRes, BookmarkNotifier bookmarkNotifier) {
     JobResponse job = bookmarksRes.job;
     return GestureDetector(
       onTap: () {
