@@ -48,7 +48,6 @@ class _JobsListState extends State<JobsList> {
               padding: EdgeInsets.symmetric(horizontal: 2.w),
               child: ListView.builder(
                   itemCount: jobs.length,
-                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, i) {
                     return JobCard(job: jobs[i]);
                   }),

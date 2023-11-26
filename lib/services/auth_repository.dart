@@ -19,11 +19,13 @@ class AuthRepository {
     if (response.statusCode == 200) {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       LoginResponse loginResponse = loginResponseFromJson(response.body);
+      String username = loginResponse.username;
       String token = loginResponse.accessToken;
       String userId = loginResponse.id;
       String? profilePic = loginResponse.profilePic;
       await prefs.setString('token', token);
       await prefs.setString('userId', userId);
+      await prefs.setString('username', username);
       await prefs.setString('profilePic', profilePic!);
       await prefs.setBool('loggedIn', true);
       return true;

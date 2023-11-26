@@ -38,7 +38,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  OutlinedButton(onPressed: null, child: ReusableText("Jobee")),
+                  ReusableText(
+                    "Jobee",
+                    style: appStyle(size: 5, color: Colors.white),
+                  ),
                   Gap(10.h),
                   drawerItems(
                       AntDesign.home,
