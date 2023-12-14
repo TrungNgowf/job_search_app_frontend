@@ -5,10 +5,9 @@ import '../views/drawer/drawer_icon.dart';
 
 class NavigatorAppbar extends StatelessWidget {
   final String title;
+  final Widget? leading;
 
-
-  const NavigatorAppbar(
-      {super.key, required this.title});
+  const NavigatorAppbar({super.key, required this.title, this.leading});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +17,13 @@ class NavigatorAppbar extends StatelessWidget {
         style: appStyle(size: 5.5, color: Colors.black, fw: FontWeight.w500),
       ),
       centerTitle: true,
-      leading: DrawerIcon(),
-      actions: const [
+      leading: const DrawerIcon(),
+      actions: [
         Padding(
-          padding: EdgeInsets.only(right: 15),
-          child: Icon(Icons.notifications_none_outlined,
-              color: Colors.black, size: 30),
+          padding: const EdgeInsets.only(right: 15),
+          child: leading ??
+              const Icon(Icons.notifications_none_outlined,
+                  color: Colors.black, size: 30),
         ),
       ],
     );

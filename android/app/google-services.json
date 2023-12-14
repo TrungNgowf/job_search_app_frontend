@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "213198839789",
+    "project_id": "job-search-app-84ada",
+    "storage_bucket": "job-search-app-84ada.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213198839789:android:e8b2c079d20d5ec27251e4",
+        "android_client_info": {
+          "package_name": "ptit.trungng.job_search_app_frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3RlmLForjxzbMqF_XbZrAAekmOAQkIh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

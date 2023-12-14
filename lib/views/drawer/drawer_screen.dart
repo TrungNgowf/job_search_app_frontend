@@ -73,7 +73,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           : Colors.white.withOpacity(0.5)),
                   drawerItems(
                       Icons.account_circle_outlined,
-                      "Tài khoản",
+                      "Thông tin cá nhân",
                       4,
                       zoomNotifier.currentIndex == 4
                           ? Colors.white

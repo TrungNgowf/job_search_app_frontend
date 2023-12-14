@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
+import 'package:job_search_app_frontend/firebase_options.dart';
 import 'package:job_search_app_frontend/views/auth/login.dart';
 import 'package:job_search_app_frontend/views/nav_screen.dart';
 import 'package:provider/provider.dart';
@@ -7,14 +9,18 @@ import 'common/export.dart';
 import 'controllers/auth_notifier.dart';
 import 'controllers/bookmark_notifier.dart';
 import 'controllers/chat_notifier.dart';
+import 'controllers/image_uploader.dart';
 import 'controllers/job_notifiier.dart';
+import 'controllers/profile_notifier.dart';
 import 'controllers/zoom_notifier.dart';
 
 Widget defaultHome = const LoginForm();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final loggedIn = prefs.getBool('loggedIn') ?? false;
   if (loggedIn) {
@@ -27,6 +33,8 @@ void main() async {
     ChangeNotifierProvider(create: (context) => JobNotifier()),
     ChangeNotifierProvider(create: (context) => BookmarkNotifier()),
     ChangeNotifierProvider(create: (context) => ChatNotifier()),
+    ChangeNotifierProvider(create: (context) => ProfileNotifier()),
+    ChangeNotifierProvider(create: (context) => ImageUploader()),
   ], child: const MyApp()));
 }
 
