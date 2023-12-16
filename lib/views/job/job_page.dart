@@ -1,8 +1,19 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:dotted_border/dotted_border.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:get/get.dart';
 import 'package:job_search_app_frontend/common/custom_button.dart';
 import 'package:job_search_app_frontend/common/export.dart';
 import 'package:job_search_app_frontend/controllers/bookmark_notifier.dart';
+import 'package:job_search_app_frontend/controllers/cv_notifier.dart';
 import 'package:job_search_app_frontend/models/response/job_res.dart';
+import 'package:job_search_app_frontend/views/upload_cv/cv_info.dart';
+import 'package:job_search_app_frontend/views/upload_cv/pdf_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../common/custom_appbar.dart';
 
@@ -16,6 +27,8 @@ class JobPage extends StatefulWidget {
 }
 
 class _JobPageState extends State<JobPage> {
+  var uuid = const Uuid();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,6 +131,11 @@ class _JobPageState extends State<JobPage> {
           CustomButton(
             width: 50.w,
             backGroundColor: iosLightIndigo,
+            onTap: () => showDialog(
+                context: context,
+                builder: (context) {
+                  return uploadCVDialog();
+                }),
             child: ReusableText(
               "Ứng tuyển ngay",
               style:
@@ -126,6 +144,128 @@ class _JobPageState extends State<JobPage> {
           )
         ],
       ),
+    );
+  }
+
+  AlertDialog uploadCVDialog() {
+    Provider.of<CVNotifier>(context, listen: false).init();
+    return AlertDialog(
+      title: Center(
+          child: ReusableText(
+        "Thêm CV để ứng tuyển",
+        style: appStyle(size: 5, fw: FontWeight.w600),
+      )),
+      content: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Consumer<CVNotifier>(
+              builder:
+                  (BuildContext context, CVNotifier cvNotifier, Widget? child) {
+                if (cvNotifier.pdfName == null) {
+                  return GestureDetector(
+                    onTap: () {
+                      cvNotifier.uploadCV();
+                    },
+                    child: DottedBorder(
+                        borderType: BorderType.RRect,
+                        radius: const Radius.circular(5),
+                        color: Colors.green,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 2.h),
+                        child:
+                            const ReusableText("Nhấn vào đây\nđể tải lên CV")),
+                  );
+                } else {
+                  return Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          cvNotifier.uploadCV();
+                        },
+                        child: DottedBorder(
+                            borderType: BorderType.RRect,
+                            radius: const Radius.circular(5),
+                            color: Colors.green,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 2.h),
+                            child: ReusableText(cvNotifier.pdfName!)),
+                      ),
+                      Gap(2.w),
+                      CustomButton(
+                        height: 5.h,
+                        width: 10.w,
+                        backGroundColor: Colors.green,
+                        onTap: () {
+                          Get.to(() => PDFScreen(
+                              path: cvNotifier.pdfPath!,
+                              name: cvNotifier.pdfName!));
+                        },
+                        child: ReusableText(
+                          "Xem trước CV",
+                          style: appStyle(color: Colors.white),
+                        ),
+                      )
+                    ],
+                  );
+                }
+              },
+            ),
+            Gap(1.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ReusableText("Chưa có CV? "),
+                TextButton(
+                  style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero, alignment: Alignment.center),
+                  onPressed: () async {
+                    var cvPath = await Get.to(() => const CVInfo())!
+                        .whenComplete(() => setState(() {}));
+                  },
+                  child: ReusableText(
+                    "Tạo CV ngay",
+                    style: TextStyle(
+                        color: iosDefaultIndigo,
+                        fontSize: 4.5.sp,
+                        fontWeight: FontWeight.w500,
+                        decoration: TextDecoration.underline,
+                        decorationColor: iosDefaultIndigo),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+      actionsAlignment: MainAxisAlignment.spaceAround,
+      actions: [
+        CustomButton(
+          width: 50.w,
+          backGroundColor: iosDefaultIndigo,
+          onTap: () {
+            Get.back();
+          },
+          child: ReusableText(
+            "Đóng",
+            style:
+                appStyle(size: 4.5, color: Colors.white, fw: FontWeight.w500),
+          ),
+        ),
+        CustomButton(
+          width: 50.w,
+          backGroundColor: Colors.white,
+          onTap: () {
+            Get.back();
+          },
+          child: ReusableText(
+            "Xác nhận",
+            style: appStyle(
+                size: 4.5, color: iosDefaultIndigo, fw: FontWeight.w500),
+          ),
+        )
+      ],
     );
   }
 }

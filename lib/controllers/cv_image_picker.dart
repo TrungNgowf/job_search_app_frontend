@@ -1,26 +1,30 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:job_search_app_frontend/common/export.dart';
 import 'package:uuid/uuid.dart';
 
-class ImageUploader extends ChangeNotifier {
+class CVImagePicker extends ChangeNotifier {
   var uuid = const Uuid();
   final ImagePicker _picker = ImagePicker();
 
-  String? imageUrl;
   String? imagePath;
-  List<String> imageList = [];
+
+  get getImagePath => imagePath;
+
+  set setImagePath(String? value) {
+    imagePath = value;
+    notifyListeners();
+  }
 
   void pickImage() async {
     XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     pickedFile = await cropImage(pickedFile!);
     if (pickedFile != null) {
-      imagePath = pickedFile.path;
-      imageList.add(imagePath!);
-      imageUpload(pickedFile);
+      setImagePath = pickedFile.path;
       notifyListeners();
     } else {
       print('No image selected.');
@@ -59,17 +63,5 @@ class ImageUploader extends ChangeNotifier {
       print('No image selected.');
       return null;
     }
-  }
-
-  Future<String?> imageUpload(XFile imageFile) async {
-    File file = File(imageFile.path);
-    final ref = FirebaseStorage.instance
-        .ref()
-        .child('jobee')
-        .child('profile_image')
-        .child("avatar_${uuid.v1()}.jpg");
-    await ref.putFile(file);
-    imageUrl = await ref.getDownloadURL();
-    return imageUrl;
   }
 }

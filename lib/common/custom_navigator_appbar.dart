@@ -5,9 +5,9 @@ import '../views/drawer/drawer_icon.dart';
 
 class NavigatorAppbar extends StatelessWidget {
   final String title;
-  final Widget? leading;
+  final Widget? trailing;
 
-  const NavigatorAppbar({super.key, required this.title, this.leading});
+  const NavigatorAppbar({super.key, required this.title, this.trailing});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class NavigatorAppbar extends StatelessWidget {
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 15),
-          child: leading ??
+          child: trailing ??
               const Icon(Icons.notifications_none_outlined,
                   color: Colors.black, size: 30),
         ),

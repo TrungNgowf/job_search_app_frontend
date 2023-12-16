@@ -30,7 +30,7 @@ class _ProfileState extends State<ProfilePage> {
         preferredSize: Size.fromHeight(7.h),
         child: NavigatorAppbar(
           title: "Thông tin cá nhân",
-          leading: Consumer<ImageUploader>(
+          trailing: Consumer<ImageUploader>(
             builder: (BuildContext context, ImageUploader imageUploader,
                 Widget? child) {
               return GestureDetector(
@@ -52,6 +52,7 @@ class _ProfileState extends State<ProfilePage> {
         builder: (BuildContext context, ProfileNotifier profileNotifier,
             Widget? child) {
           profileNotifier.getProfile();
+          Provider.of<ImageUploader>(context, listen: false).imageList.clear();
           return FutureBuilder<ProfileRes>(
               future: profileNotifier.profile,
               builder: (context, snapshot) {
@@ -75,19 +76,37 @@ class _ProfileState extends State<ProfilePage> {
                           'telephone': profile.telephone,
                           'email': profile.email,
                           'dob': profile.dob,
-                          'address': profile.address,
-                          'portfolio': profile.portfolio,
-                          'education': profile.education,
-                          'major': profile.major,
-                          'degree': profile.degree,
-                          'careerGoals': profile.careerGoals,
-                          'exp1': profile.experiences?[0],
-                          'exp2': profile.experiences?[1],
-                          'exp3': profile.experiences?[2],
-                          'skill1': profile.skills?[0],
-                          'skill2': profile.skills?[1],
-                          'skill3': profile.skills?[2],
-                          'additionInfo': profile.additionInfo,
+                          'address': profile.address ?? "",
+                          'portfolio': profile.portfolio ?? "",
+                          'education': profile.education ?? "",
+                          'major': profile.major ?? "",
+                          'degree': profile.degree ?? "",
+                          'careerGoals': profile.careerGoals ?? "",
+                          'exp1': (profile.experiences == null ||
+                                  profile.experiences!.isEmpty)
+                              ? ""
+                              : profile.experiences![0] ?? "",
+                          'exp2': (profile.experiences == null ||
+                                  profile.experiences!.isEmpty)
+                              ? ""
+                              : profile.experiences![1] ?? "",
+                          'exp3': (profile.experiences == null ||
+                                  profile.experiences!.isEmpty)
+                              ? ""
+                              : profile.experiences![2] ?? "",
+                          'skill1': (profile.skills == null ||
+                                  profile.skills!.isEmpty)
+                              ? ""
+                              : profile.skills![0] ?? "",
+                          'skill2': (profile.skills == null ||
+                                  profile.skills!.isEmpty)
+                              ? ""
+                              : profile.skills![1] ?? "",
+                          'skill3': (profile.skills == null ||
+                                  profile.skills!.isEmpty)
+                              ? ""
+                              : profile.skills![2] ?? "",
+                          'additionInfo': profile.additionInfo ?? "",
                         },
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,9 +235,6 @@ class _ProfileState extends State<ProfilePage> {
                               Gap(1.h),
                               FormBuilderTextField(
                                 name: 'portfolio',
-                                validator: FormBuilderValidators.compose([
-                                  FormBuilderValidators.required(),
-                                ]),
                                 decoration: const InputDecoration(
                                     labelText: 'Link Portfolio',
                                     contentPadding: EdgeInsets.all(10),
@@ -350,9 +366,6 @@ class _ProfileState extends State<ProfilePage> {
                               Gap(1.h),
                               FormBuilderTextField(
                                 name: 'additionInfo',
-                                validator: FormBuilderValidators.compose([
-                                  FormBuilderValidators.required(),
-                                ]),
                                 decoration: const InputDecoration(
                                     labelText: 'Thông tin thêm',
                                     contentPadding: EdgeInsets.all(10),

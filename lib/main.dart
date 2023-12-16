@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
+import 'package:job_search_app_frontend/controllers/cv_notifier.dart';
 import 'package:job_search_app_frontend/firebase_options.dart';
 import 'package:job_search_app_frontend/views/auth/login.dart';
 import 'package:job_search_app_frontend/views/nav_screen.dart';
@@ -9,6 +10,7 @@ import 'common/export.dart';
 import 'controllers/auth_notifier.dart';
 import 'controllers/bookmark_notifier.dart';
 import 'controllers/chat_notifier.dart';
+import 'controllers/cv_image_picker.dart';
 import 'controllers/image_uploader.dart';
 import 'controllers/job_notifiier.dart';
 import 'controllers/profile_notifier.dart';
@@ -35,6 +37,8 @@ void main() async {
     ChangeNotifierProvider(create: (context) => ChatNotifier()),
     ChangeNotifierProvider(create: (context) => ProfileNotifier()),
     ChangeNotifierProvider(create: (context) => ImageUploader()),
+    ChangeNotifierProvider(create: (context) => CVNotifier()),
+    ChangeNotifierProvider(create: (context) => CVImagePicker()),
   ], child: const MyApp()));
 }
 
