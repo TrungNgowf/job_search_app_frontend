@@ -440,6 +440,19 @@ class _CVInfoState extends State<CVInfo> {
                                   .imagePath;
                               String position = _cvKey
                                   .currentState!.fields['position']!.value;
+                              if (imageUrl == null &&
+                                  profile.profilePic == null) {
+                                Get.snackbar(
+                                    "Thất bại", 'Vui lòng chọn ảnh đại diện',
+                                    snackPosition: SnackPosition.TOP,
+                                    backgroundColor: Colors.red,
+                                    colorText: Colors.white,
+                                    icon: const Icon(
+                                      Icons.error_outline_rounded,
+                                      color: Colors.white,
+                                    ));
+                                return;
+                              }
                               var finalCV = Get.to(() => CreateCV(
                                   profile: profileInfo,
                                   position: position,

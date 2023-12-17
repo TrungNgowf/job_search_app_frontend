@@ -10,10 +10,11 @@ class VideoPlayerView extends StatefulWidget {
     super.key,
     required this.url,
     required this.dataSourceType,
+    required this.name,
   });
 
   final String url;
-
+  final String name;
   final DataSourceType dataSourceType;
 
   @override
@@ -67,21 +68,24 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ReusableText(widget.dataSourceType.name.toUpperCase(),
-            style: appStyle(size: 5, fw: FontWeight.w600)),
-        const Divider(),
-        _videoPlayerController.value.isInitialized
-            ? AspectRatio(
-                aspectRatio: _videoPlayerController.value.aspectRatio,
-                child: Chewie(controller: _chewieController),
-              )
-            : Container(
-                padding: EdgeInsets.all(3.h),
-                child: const Center(child: CircularProgressIndicator())),
-      ],
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 1.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ReusableText(widget.name,
+              style: appStyle(size: 4.5, fw: FontWeight.w600)),
+          const Divider(),
+          _videoPlayerController.value.isInitialized
+              ? AspectRatio(
+                  aspectRatio: _videoPlayerController.value.aspectRatio,
+                  child: Chewie(controller: _chewieController),
+                )
+              : Container(
+                  padding: EdgeInsets.all(3.h),
+                  child: const Center(child: CircularProgressIndicator())),
+        ],
+      ),
     );
   }
 }

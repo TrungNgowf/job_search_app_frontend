@@ -82,11 +82,16 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         Gap(0.5.h),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            "assets/images/home_banner.jpg",
-            filterQuality: FilterQuality.high,
+        GestureDetector(
+          onTap: () {
+            Get.to(() => const VideoPlayersScreen());
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              "assets/images/home_banner.jpg",
+              filterQuality: FilterQuality.high,
+            ),
           ),
         ),
       ],

@@ -50,10 +50,9 @@ class _AppliedJobsPageState extends State<AppliedJobsPage> {
               } else {
                 final appliedJobs = snapshot.data!;
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 2.w),
+                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                   child: ListView.builder(
                       itemCount: appliedJobs.length,
-                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, i) {
                         return appliedJobsCard(
                             appliedJobs[i], appliedJobsNotifier);
