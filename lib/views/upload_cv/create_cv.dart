@@ -104,7 +104,8 @@ class CreateCV extends StatelessWidget {
                     _text(profile.username!, fontBold,
                         fontWeight: pw.FontWeight.bold,
                         fontSize: 5.sp,
-                        color: PdfColors.green),
+                        color: PdfColors.green,
+                        textAlign: pw.TextAlign.center),
                     pw.SizedBox(height: 1.h),
                     _text(
                       position,
@@ -293,10 +294,13 @@ class CreateCV extends StatelessWidget {
   }
 
   _text(String text, pw.Font font,
-      {PdfColor? color, double? fontSize, pw.FontWeight? fontWeight}) {
+      {PdfColor? color,
+      double? fontSize,
+      pw.FontWeight? fontWeight,
+      pw.TextAlign textAlign = pw.TextAlign.start}) {
     return pw.Text(
       text,
-      textAlign: pw.TextAlign.center,
+      textAlign: textAlign,
       style: pw.TextStyle(
         font: font,
         color: color ?? PdfColors.black,
@@ -308,10 +312,14 @@ class CreateCV extends StatelessWidget {
 
   Future<List<String>> savePdf() async {
     final output = await getTemporaryDirectory();
-    final file = File("${output.path}/${profile!.username!.trim()}_CV.pdf");
+    final file = File(
+        "${output.path}/${profile!.username!.trim().replaceAll(" ", "")}_CV.pdf");
     final pdf = await _generatePdf(
         PdfPageFormat.a4, profile!, imageUrl!, "CV", isImageNetwork!);
     await file.writeAsBytes(pdf);
-    return ["${profile!.username!.trim()}_CV.pdf", file.path];
+    return [
+      "${profile!.username!.trim().replaceAll(" ", "")}_CV.pdf",
+      file.path
+    ];
   }
 }
