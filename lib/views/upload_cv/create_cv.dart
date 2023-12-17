@@ -37,11 +37,9 @@ class CreateCV extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 List<String> finalFile = await savePdf();
-                Provider.of<CVNotifier>(context, listen: false)
-                    .setPdfName(finalFile[0]);
-                Provider.of<CVNotifier>(context, listen: false)
-                    .setPdfPath(finalFile[1]);
-                Get.close(2);
+                Navigator.of(context)
+                  ..pop(finalFile)
+                  ..pop(finalFile);
               },
               child: const Padding(
                 padding: EdgeInsets.only(right: 15.0),

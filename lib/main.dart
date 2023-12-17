@@ -7,6 +7,7 @@ import 'package:job_search_app_frontend/views/nav_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'common/export.dart';
+import 'controllers/applied_jobs_notifier.dart';
 import 'controllers/auth_notifier.dart';
 import 'controllers/bookmark_notifier.dart';
 import 'controllers/chat_notifier.dart';
@@ -39,6 +40,7 @@ void main() async {
     ChangeNotifierProvider(create: (context) => ImageUploader()),
     ChangeNotifierProvider(create: (context) => CVNotifier()),
     ChangeNotifierProvider(create: (context) => CVImagePicker()),
+    ChangeNotifierProvider(create: (context) => AppliedJobsNotifier()),
   ], child: const MyApp()));
 }
 

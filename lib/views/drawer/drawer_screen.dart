@@ -59,14 +59,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           : Colors.white.withOpacity(0.5)),
                   drawerItems(
                       Fontisto.bookmark,
-                      "Lưu trữ",
+                      "Đã lưu",
                       2,
                       zoomNotifier.currentIndex == 2
                           ? Colors.white
                           : Colors.white.withOpacity(0.5)),
                   drawerItems(
-                      Icons.developer_mode,
-                      "Cài đặt thiết bị",
+                      Icons.file_open_rounded,
+                      "Ứng tuyển",
                       3,
                       zoomNotifier.currentIndex == 3
                           ? Colors.white

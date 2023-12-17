@@ -9,5 +9,6 @@ class ApiRoutes {
   static const String bookmarkUrl = '/bookmarks';
   static const String searchUrl = '/jobs/search';
   static const String chatUrl = '/chats';
+  static const String cvUrl = '/cv';
   static const String messageUrl = '/messages';
 }
