@@ -150,11 +150,10 @@ class _JobPageState extends State<JobPage> {
   AlertDialog uploadCVDialog() {
     Provider.of<CVNotifier>(context, listen: false).init();
     return AlertDialog(
-      title: SingleChildScrollView(
-          child: ReusableText(
+      title: ReusableText(
         "Thêm CV để ứng tuyển",
         style: appStyle(size: 5, fw: FontWeight.w600),
-      )),
+      ),
       content: Container(
         child: Column(
           mainAxisSize: MainAxisSize.min,

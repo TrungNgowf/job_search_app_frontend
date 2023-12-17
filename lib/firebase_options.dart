@@ -47,28 +47,28 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBt71H5d40oHVCQDTCU_UfftdpPowCR0e4',
-    appId: '1:213198839789:web:9ae35a0ff2b2287b7251e4',
-    messagingSenderId: '213198839789',
-    projectId: 'job-search-app-84ada',
-    authDomain: 'job-search-app-84ada.firebaseapp.com',
-    storageBucket: 'job-search-app-84ada.appspot.com',
+    apiKey: 'AIzaSyCZMGwKqo0ylC0anU7o5lrIqNt0aXGKysU',
+    appId: '1:400746045767:web:4e38d3ec120c74cf67ec62',
+    messagingSenderId: '400746045767',
+    projectId: 'jobee-5a2f8',
+    authDomain: 'jobee-5a2f8.firebaseapp.com',
+    storageBucket: 'jobee-5a2f8.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB3RlmLForjxzbMqF_XbZrAAekmOAQkIh0',
-    appId: '1:213198839789:android:e8b2c079d20d5ec27251e4',
-    messagingSenderId: '213198839789',
-    projectId: 'job-search-app-84ada',
-    storageBucket: 'job-search-app-84ada.appspot.com',
+    apiKey: 'AIzaSyAiPQHq-cet44L_jRyMSsWVI-efbOPm12U',
+    appId: '1:400746045767:android:87febe4df37ca14d67ec62',
+    messagingSenderId: '400746045767',
+    projectId: 'jobee-5a2f8',
+    storageBucket: 'jobee-5a2f8.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDRQaLRGrO4vSupGdo7C-tbdvOnqFwLZR0',
-    appId: '1:213198839789:ios:37e5ba42934db8767251e4',
-    messagingSenderId: '213198839789',
-    projectId: 'job-search-app-84ada',
-    storageBucket: 'job-search-app-84ada.appspot.com',
+    apiKey: 'AIzaSyC0h_cuMgBCyWuU8Wc3Siq1BkPYgYif9g4',
+    appId: '1:400746045767:ios:cc11845a090e34c867ec62',
+    messagingSenderId: '400746045767',
+    projectId: 'jobee-5a2f8',
+    storageBucket: 'jobee-5a2f8.appspot.com',
     iosBundleId: 'ptit.trungng.jobSearchAppFrontend',
   );
 }
