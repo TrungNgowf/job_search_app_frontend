@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 import '../../common/custom_appbar.dart';
 import '../../common/custom_navigator_appbar.dart';
 import '../job/jobs_search.dart';
+import '../video_player/video_player_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -69,9 +70,14 @@ class _HomePageState extends State<HomePage> {
               "Một vài mẹo cho bạn",
               style: appStyle(fw: FontWeight.w600),
             ),
-            ReusableText(
-              "Xem thêm",
-              style: appStyle(size: 3.5, color: iosLightIndigo),
+            GestureDetector(
+              onTap: () {
+                Get.to(() => const VideoPlayersScreen());
+              },
+              child: ReusableText(
+                "Xem thêm",
+                style: appStyle(size: 3.5, color: iosLightIndigo),
+              ),
             )
           ],
         ),
